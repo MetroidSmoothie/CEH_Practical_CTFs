@@ -1,2 +1,3 @@
 # CEH_practical_ctf
-CEH Engage Notes (Parts I-IV)
+
+[Insert explanation of Lab Environment and Scenario]
