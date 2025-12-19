@@ -107,6 +107,8 @@ Or directly locate MySQL service:
 Then perform an aggressive scan on the identified host:  
 `nmap -A 172.30.10.99`
 
+<img width="760" height="483" alt="image" src="https://github.com/user-attachments/assets/0ef05ae9-d664-492f-b6bd-7a9ac573be8b" />
+
 ---
 
 **Q9. Perform an intense scan on target subnet 192.168.10.0/24 and determine the IP address of the machine hosting the MSSQL database service**
@@ -155,6 +157,8 @@ Scan for SMTP service:
 
 Perform SMB service enumeration:  
 `nmap -p 445 -sV -A 172.30.10.200`
+
+<img width="518" height="373" alt="image 1" src="https://github.com/user-attachments/assets/8e5cbc2c-4bc7-4545-a781-a892ab908cb8" />
 
 ---
 
