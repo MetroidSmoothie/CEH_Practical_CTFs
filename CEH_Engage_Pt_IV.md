@@ -24,7 +24,7 @@ Use BC Text Encoder Utility on Windows to decode the file using the password `Pa
 
 ---
 
-**Q2. A compromised Android device is suspected of containing malicious applications. Extract all installed APK files and determine the CRC value ending with “614c”. (Format: NNaaNNNa)**
+**Q2. A compromised Android device is suspected of containing malicious applications. Extract all installed APK files and determine the CRC value ending with “614c”. This CRC value is believed to be a crucial component of a larger security breach investigation. Determine the complete CRC value as answer (Format: NNaaNNNa)**
 
 **Answer:** 53ac614c
 
@@ -33,14 +33,14 @@ Use BC Text Encoder Utility on Windows to decode the file using the password `Pa
 Connect via PhoneSploit and navigate to APK extraction:
 - Use option **N** twice to reach next menus
 - Select **36** (Extract APK from Installed App)
-- Choose `com.cxinventor.file.explorer`
+- Select **2** for `com.cxinventor.file.explorer`
 
-In the APK directory, run:
+Run terminal in installs APK directory, run:
 `crc32 <apk_filename>`
 
 ---
 
-**Q3. A ZIP archive containing redundant images of a physical signature has been compromised. Identify the image file whose MD5 hash ends with “24CCB”. (Format: aN*aaa)**
+**Q3. A ZIP archive containing redundant images of a physical signature has been compromised.  Your role as an ethical hacker involves a forensic examination of the archive's contents to pinpoint the image file associated with an MD5 hash value ends with sequence "24CCB". Determine the original signature file name as answer. (Format: aN*aaa)**
 
 **Answer:** k4.png
 
@@ -54,12 +54,13 @@ Compare hash values to identify the matching file.
 
 ---
 
-**Q4. Investigate a suspected phishing attempt targeting Ruby by analyzing an Android call log. Identify the suspicious phone number. (Format: +N (NNN) NNN-NNNN)**
+**Q4. As a cybersecurity analyst, you are investigating a potential phishing campaign targeting Ruby, an employee at a local tech company. You have access to Ruby’s call log from the past few days, stored on an Android device within the target subnet 192.168.10.0/24. Identify the call in the log that is most likely a phishing attempt and provide the suspected phone number. (Format: +N (NNN) NNN-NNNN )**
 
 **Answer:** +1 (555) 678-9012
 
 **Explanation:**  
 
+Note: Dumping call log does not work
 Dump call logs from:
 `sdcard/calls/call_log_dump`
 
@@ -89,7 +90,7 @@ Review the severity classification.
 
 In Wireshark:
 - Go to **Edit → Find Packet**
-- Search for string `High_humidity`
+- Search parameter ‘String’ → `High_humidity`
 - Right-click the packet → **Follow TCP Stream**
 
 ---
@@ -120,7 +121,7 @@ Navigate to the mounted drive and count files in the `S2` folder.
 
 ---
 
-**Q9. Retrieve the contacts dump from an Android phone and identify the country code for the contact named “Maddy”. (Format: NN)**
+**Q9. Retrieve the contacts dump from an Android phone on one of the target subnets and identify the country code for the contact named “Maddy”. (Format: NN)**
 
 **Answer:** 61
 
@@ -137,7 +138,7 @@ Navigate through pages using option **N** until locating “Maddy”.
 
 **Explanation:**  
 
-Search Wireshark for `High_temperature`.  
+Using 'String' parameter -> Search Wireshark for `High_temperature`.  
 Inspect the MQTT header to identify the topic length field.
 
 ---
@@ -165,7 +166,7 @@ Access the file, retrieve the numeric data, and delete it.
 
 ---
 
-**Q13. Retrieve a screenshot of a LOIC attack from a compromised Android device and determine the number of HTTP packets sent per second. (Format: NN)**
+**Q13. Retrieve a screenshot of an LOIC attack from a compromised Android device and determine the number of HTTP packets sent per second. (Format: NN)**
 
 **Answer:** 23
 
