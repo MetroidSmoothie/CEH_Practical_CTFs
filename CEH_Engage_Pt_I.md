@@ -12,6 +12,7 @@ Vulnerability Analysis
 
 **Explanation:**  
 The hostname was identified through footprinting analysis of the web application’s associated IP address.
+`nslookup -type=NS example.com`
 
 ---
 
